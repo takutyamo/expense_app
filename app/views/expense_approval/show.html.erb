@@ -1,0 +1,14 @@
+<%= @approval.expense.expense_title %>
+申請者：<%= @approval.user.first_name + @approval.user.last_name %> さん
+<% if @approval.approval == 'unconfirmed' %>
+    <%= form_with model:@approval do |f| %>
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
+    <%= f.submit %>
+    <% end %>
+    <%= form_with url:"/expense_approval/approval/#{@approval.id}", method: :get do |f| %>
+    <%= f.submit %>
+    <% end %>
+<% else %>
+判断済み
+<% end %>

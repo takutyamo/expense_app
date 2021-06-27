@@ -1,0 +1,10 @@
+<%= form_with model: expense, url: expense_index_path, method: :post, local: true do |f| %>
+<%= f.select :account_id, options_for_select(Account.pluck(:name,:id))  %>
+<%= f.label :expense_title %>
+<%= f.text_field :expense_title %>
+<%= f.label :money %>
+<%= f.text_field :money %>
+<%= f.label :perpose %>
+<%= f.text_area :purpose %>
+<%= f.submit %>
+<% end %>

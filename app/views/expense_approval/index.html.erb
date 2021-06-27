@@ -1,0 +1,14 @@
+<ul>
+<% @approval.each do |a| %>
+    <li>
+    <%= link_to a.expense.expense_title, expense_approval_path(a) %>
+    <% if a.approval == 'unconfirmed'%>
+        承認待ち
+    <% elsif a.approval == 'approval' %>
+        承認済
+    <% else %>
+        却下済
+    <% end %>
+    </li>
+<% end %>
+</ul>

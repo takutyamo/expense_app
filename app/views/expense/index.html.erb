@@ -1,0 +1,14 @@
+<ul>
+<% @expenses.each do |e| %>
+<li>
+<%= e.account_id  %>
+<%= link_to e.expense_title, expense_path(e) %>
+<% if e.applicant == false %>
+<%= link_to '編集', '/' %>
+<%= link_to '申請',"expense_approval/#{e.id}", method: :post %>
+<% else %>
+申請済
+<% end %>
+</li>
+<% end %>
+</ul>
