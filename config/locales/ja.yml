@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      expense_approval: 申請済書類
+      user: ユーザー
+      company: 企業
+      expense: 申請書
+    attributes:
+      expense_approval:
+        comment: コメント
+      user:
+        first_name: 姓
+        last_name:  名
+      company:
+        name: 企業名
+        address:  住所
+        email:  メールアドレス
+      expense:
+        expense_title:  申請書タイトル
+        money:  金額

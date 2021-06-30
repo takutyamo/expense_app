@@ -6,5 +6,8 @@ class User < ApplicationRecord
   belongs_to :company
   has_many :expense
   has_many :expense_approval
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   
 end

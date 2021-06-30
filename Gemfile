@@ -60,3 +60,5 @@ gem 'devise'
 gem 'chartkick'
 
 gem 'groupdate'
+
+gem 'rails-i18n'

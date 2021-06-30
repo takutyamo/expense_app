@@ -7,25 +7,24 @@ class ExpenseApprovalController < ApplicationController
 
     def create
         expense = Expense.find(params[:id])
-        user = current_user
         @approval = expense.build_expense_approval
         @approval.user = current_user
         @approval.approval = 0
-        puts @approval.expense
+        @approval.comment = "却下時は理由を入力してください。"
         if @approval.save
-            puts 'save'
             expense.applicant = true
             expense.save
-            redirect_to '/'
+            redirect_to expense_index_path
         end
     end
 
     def update
-        approval = ExpenseApproval.find(params[:id])
-        approval.comment = params[:expense_approval][:comment]
-        approval.approval = 2
-        approval.save
-        redirect_to '/'
+        @approval = ExpenseApproval.find(params[:id])
+        @approval.comment = params[:expense_approval][:comment]
+        @approval.approval = 2
+        if @approval.save
+            redirect_to expense_approval_index_path
+        end
     end
 
     def approval

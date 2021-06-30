@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  get 'employee/new' => 'companies#employee_new'
-  post 'employee/create' => 'companies#employee_create'
+  get 'employees' => 'employee#index'
+  get 'employee/new' => 'employee#new'
+  post 'employee/create' => 'employee#create'
 
   post 'expense_approval/:id' => 'expense_approval#create'
   get 'expense_approval/approval/:id' => 'expense_approval#approval'

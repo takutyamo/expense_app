@@ -13,11 +13,12 @@
   <body>
     <header>
       <ul>
-      <% if current_user %>
+      <li><%= link_to "home", '/' %></li>
+        <% if current_user %>
         <% if current_user.admin %>
-          <li><%= link_to '会社情報','/'%></li>
           <li><%= link_to "従業員登録", '/employee/new' %></li>
           <li><%= link_to "申請一覧", expense_approval_index_path %></li>
+          <li><%= link_to "従業員一覧", '/employees' %></li>
         <% else %>
           <li><%= link_to '申請書作成', new_expense_path %></li>
           <li><%= link_to "申請経費一覧", expense_index_path %></li>
@@ -27,10 +28,10 @@
       <% else %>
         <li><%= link_to '企業登録', new_company_path %></li>
         <li><%= link_to "ユーザーログイン", new_user_session_path %></li>
-        <li><%= link_to "従業員登録", new_user_registration_path %></li>
       <% end %>
       </ul>
     </header>
+    <div id="errors"></div>
     <%= yield %>
   </body>
 </html>

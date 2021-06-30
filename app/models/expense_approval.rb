@@ -2,6 +2,8 @@ class ExpenseApproval < ApplicationRecord
   belongs_to :expense
   belongs_to :user
 
+  validates :comment, presence: true
+
   enum approval: {
     unconfirmed: 0,
     approval: 1,

@@ -1,7 +1,7 @@
 <ul>
 <% @expenses.each do |e| %>
 <li>
-<%= e.account_id  %>
+<%= Account.find(e.account_id).name  %>
 <%= link_to e.expense_title, expense_path(e) %>
 <% if e.applicant == false %>
 <%= link_to '編集', '/' %>
