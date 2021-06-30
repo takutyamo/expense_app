@@ -11,27 +11,44 @@
   </head>
 
   <body>
-    <header>
-      <ul>
-      <li><%= link_to "home", '/' %></li>
-        <% if current_user %>
-        <% if current_user.admin %>
-          <li><%= link_to "従業員登録", '/employee/new' %></li>
-          <li><%= link_to "申請一覧", expense_approval_index_path %></li>
-          <li><%= link_to "従業員一覧", '/employees' %></li>
-        <% else %>
-          <li><%= link_to '申請書作成', new_expense_path %></li>
-          <li><%= link_to "申請経費一覧", expense_index_path %></li>
-        <% end %>
-        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        <li><%= current_user.first_name + current_user.last_name + 'さん' %></li>
+    <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow bg-dark">
+      <% if current_user %>
+        <%= link_to current_user.company.name, '/', class: "navbar-brand col-sm-3 com-md-2 mr-0" %>
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+        </ul>
       <% else %>
-        <li><%= link_to '企業登録', new_company_path %></li>
-        <li><%= link_to "ユーザーログイン", new_user_session_path %></li>
+        <%= link_to "経費精算.com", '/', class: "navbar-brand col-sm-3 col-md-2 mr-0"%>
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap"><%= link_to "ログイン", new_user_session_path, class: "nav-link" %></li>
+        </ul>
       <% end %>
-      </ul>
     </header>
-    <div id="errors"></div>
-    <%= yield %>
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+            <% if current_user %>
+              <% if current_user.admin %>
+                <li class="nav-item"><%= link_to "従業員登録", '/employee/new', class: "nav-link active" %></li>
+                <li class="nav-item"><%= link_to "申請一覧", expense_approval_index_path, class: "nav-link active"  %></li>
+                <li class="nav-item"><%= link_to "従業員一覧", '/employees', class: "nav-link active"  %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to '申請書作成', new_expense_path, class: "nav-link active"  %></li>
+                <li class="nav-item"><%= link_to "申請経費一覧", expense_index_path, class: "nav-link active"  %></li>
+              <% end %>
+            <% else %>
+              <li class="nav-item"><%= link_to '企業登録', new_company_path, class: "nav-link active"  %></li>
+            <% end %>
+            </ul>
+          </div>
+        </nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div id="errors"></div>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
