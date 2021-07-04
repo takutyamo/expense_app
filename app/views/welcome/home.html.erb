@@ -1,6 +1,5 @@
 <div class="chartjs-size-monitor">
 <% if current_user %>
-<p><%= current_user.company.name %></p>
     <% if current_user.admin %>
     今月の承認済合計金額：<%= Expense.where(id: company_has_approval(current_user).where(approval: 1).this_month.pluck(:expense_id)).sum(:money) %>
         <hr>
@@ -20,10 +19,11 @@
         <%= column_chart rename(Expense.where(id: company_has_approval(current_user).where(approval: 1).last_month.pluck(:expense_id)).group(:account_id).sum(:money)) %>
     <% else %>
         今月申請許可
-        <% rename({1=>10}) %>
         <%= column_chart rename(Expense.where(id: ExpenseApproval.where(expense: Expense.where(user: current_user)).where(approval: 1).this_month.pluck(:expense_id)).group(:account_id).sum(:money)) %>
         先月申請許可
         <%= column_chart rename(Expense.where(id: ExpenseApproval.where(expense: Expense.where(user: current_user)).where(approval: 1).last_month.pluck(:expense_id)).group(:account_id).sum(:money)) %>
     <% end %>
+<% else %>
+    <h1>ようこそ</h1>
 <% end %>
 </div>
