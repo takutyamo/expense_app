@@ -1,4 +1,19 @@
-<h1></h1>
-<% @employee.each do |e|%>
-<%= e.first_name + e.last_name %>さん
-<% end %>
+<h1>従業員一覧</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">従業員名</th>
+            <th scope="col">アカウント作成日</th>
+            <th scope="col">権限</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @employee.each do |e|%>
+        <tr>
+            <td><%= e.first_name + e.last_name %>さん</td>
+            <td><%= date_format(e.created_at) %></td>
+            <td><%= admin(e.admin)%></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

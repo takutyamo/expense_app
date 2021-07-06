@@ -19,13 +19,15 @@
         </ul>
       <% else %>
         <%= link_to "経費精算.com", '/', class: "navbar-brand col-sm-3 col-md-2 mr-0"%>
-        <ul class="navbar-nav px-3 ">
+        <ul class="nav px-3 ">
+          <li class="nav-item text-nowrap"><%= link_to "企業登録", new_company_path, class: "nav-link" %></li>
           <li class="nav-item text-nowrap"><%= link_to "ログイン", new_user_session_path, class: "nav-link" %></li>
         </ul>
       <% end %>
     </header>
     <div class="container-fluid">
       <div class="row">
+      <% if current_user %>
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="min-height: 100vh;">
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
@@ -39,12 +41,11 @@
                 <li class="nav-item"><%= link_to  new_expense_path, class: "nav-link active" do %><i class="fas fa-file-invoice-dollar"></i>申請書作成<% end %></li>
                 <li class="nav-item"><%= link_to  expense_index_path, class: "nav-link active" do %><i class="fas fa-file-invoice-dollar"></i>申請経費一覧<% end %></li>
               <% end %>
-            <% else %>
-              <li class="nav-item"><%= link_to new_company_path, class: "nav-link active" do %><i class="fas fa-building"></i>企業登録<% end %></li>
             <% end %>
             </ul>
           </div>
         </nav>
+        <% end %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div id="errors"></div>
           <%= yield %>
