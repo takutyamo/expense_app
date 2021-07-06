@@ -1,0 +1,11 @@
+<td>
+    <%= link_to approval.expense.expense_title, expense_approval_path(approval) %>
+</td>
+<td>
+    <%= approval.expense.user.first_name + approval.expense.user.last_name %>さん
+</td>
+<td>
+    <% if approval.updated_at > approval.created_at %>
+        <%= date_format(approval.updated_at) %>
+    <% end %>
+</td>

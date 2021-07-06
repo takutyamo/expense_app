@@ -1,14 +1,38 @@
-<ul>
-<% @approval.each do |a| %>
-    <li>
-    <%= link_to a.expense.expense_title, expense_approval_path(a) %>
-    <% if a.approval == 'unconfirmed'%>
-        承認待ち
-    <% elsif a.approval == 'approval' %>
-        承認済
-    <% else %>
-        却下済
+<h1>申請書一覧</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">申請名</th>
+            <th scioe="col">申請者</th>
+            <th scope="col">申請確認日</th>
+            <th scope="col">申請状態</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @approvals.each do |approval| %>
+        <% if approval.approval == 'unconfirmed'%>
+            <tr>
+                <%= render 'tableline', approval: approval%>
+                <td>
+                    承認待ち
+                </td>
+            </tr>
+        <% elsif approval.approval == 'approval' %>
+            <tr class="table-success">
+               <%= render 'tableline', approval: approval%>
+                <td>
+                    承認済
+                </td>
+            </tr>
+        <% else %>
+            <tr class="table-secondary">
+             <%= render 'tableline', approval: approval%>
+                <td>
+                    却下
+                </td>
+            </tr>
+        <% end %>
     <% end %>
-    </li>
-<% end %>
-</ul>
+    </tbody>
+</table>
+<%= paginate @approvals %>

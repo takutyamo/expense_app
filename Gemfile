@@ -62,3 +62,5 @@ gem 'chartkick'
 gem 'groupdate'
 
 gem 'rails-i18n'
+
+gem 'kaminari', '~> 1.2.0'

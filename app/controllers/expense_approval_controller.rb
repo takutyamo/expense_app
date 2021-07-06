@@ -2,7 +2,7 @@ class ExpenseApprovalController < ApplicationController
     def index
         company = current_user.company
         employee = User.where(company: company)
-        @approval = ExpenseApproval.where(user: employee).order(created_at: :desc)
+        @approvals = ExpenseApproval.page(params[:page]).per(10).where(user: employee).order(created_at: :desc)
     end
 
     def create
