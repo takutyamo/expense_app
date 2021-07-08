@@ -3,18 +3,45 @@
     <thead>
         <tr>
             <th scope="col">申請名</th>
-            <th scioe="col">申請者</th>
+            <th scope="col">申請者</th>
             <th scope="col">申請確認日</th>
             <th scope="col">申請状態</th>
         </tr>
     </thead>
     <tbody>
-    <% @approvals.each do |approval| %>
+    <% @approvals.each_with_index do |approval,i| %>
         <% if approval.approval == 'unconfirmed'%>
             <tr>
                 <%= render 'tableline', approval: approval%>
                 <td>
-                    承認待ち
+                    <button type="button" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample<%=i%>" aria-expanded="false" aria-controls="collapseExample">
+                        承認待ち
+                    </button>
+                </td>
+            </tr>
+            <tr class="collapse" id="collapseExample<%=i%>">
+                <td colspan="4">
+                    <% if approval.errors.any? %>
+                        <ul>
+                        <% approval.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                    <% end %>
+                    <h2><%= approval.expense.expense_title %></h2>
+                    <% if approval.approval == 'unconfirmed' %>
+                        <div class="form-group">
+                            <%= form_with model:approval, local: false  do |f| %>
+                                <%= f.text_area :comment,class: "form-control" %>
+                                <%= f.submit "却下", class: "btn btn-primary" %>
+                                <%= form_with url:"/expense_approval/approval/#{approval.id}", method: :get do |f| %>
+                                    <%= f.submit "承認", class: "btn btn-primary"%>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        判断済み
+                    <% end %>
                 </td>
             </tr>
         <% elsif approval.approval == 'approval' %>
