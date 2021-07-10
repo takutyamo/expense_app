@@ -16,4 +16,8 @@ module ExpensesHelper
     def sum(item)
         sitemeach { |n| sum += (item.integer? ? sum += n : sum += 0 ) }
     end
+
+    def compression(title)
+        title.length >= 10 ? title.scan(/.{1,#{8}}/).first + "..." : title
+    end
 end
