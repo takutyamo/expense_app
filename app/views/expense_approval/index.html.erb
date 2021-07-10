@@ -33,9 +33,9 @@
                         <div class="form-group">
                             <%= form_with model:approval, local: false  do |f| %>
                                 <%= f.text_area :comment,class: "form-control" %>
-                                <%= f.submit "却下", class: "btn btn-primary" %>
+                                <%= f.submit "却下", class: "btn btn-primary",data: {confirm: "本当に却下しますか？"} %>
                                 <%= form_with url:"/expense_approval/approval/#{approval.id}", method: :get do |f| %>
-                                    <%= f.submit "承認", class: "btn btn-primary"%>
+                                    <%= f.submit "承認", class: "btn btn-primary",data: {confirm: "本当に承認しますか？"} %>
                                 <% end %>
                             <% end %>
                         </div>

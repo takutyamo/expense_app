@@ -1,14 +1,29 @@
-<ul>
-<% @expenses.each do |e| %>
-<li>
-<%= Account.find(e.account_id).name  %>
-<%= link_to e.expense_title, expense_path(e) %>
-<% if e.applicant == false %>
-<%= link_to '編集', '/' %>
-<%= link_to '申請',"expense_approval/#{e.id}", method: :post %>
-<% else %>
-申請済
-<% end %>
-</li>
-<% end %>
-</ul>
+<h1>申請書一覧</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>申請書名</th>
+            <th>勘定科目名</th>
+            <th>申請日</th>
+            <th>申請状態</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @expenses.each do |expense| %>
+        <tr>
+            <td><%= link_to(compression(expense.expense_title), edit_expense_path(expense)) %></td>
+            <td><%= Account.find(expense.account_id).name  %></td>
+            <td><%= date_format(expense.updated_at) %></td>
+            <td>
+                <% if ExpenseApproval.find_by(expense_id: expense.id) %>
+                        申請済み
+                <% else %>
+                    <%= form_with url: expense_approval_path(expense), method: :post  do |f| %>
+                        <%= f.submit "申請", class: "btn btn-primary",data: {confirm: "本当に申請しますか？"} %>
+                    <% end %>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
