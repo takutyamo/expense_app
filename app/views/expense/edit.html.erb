@@ -1,2 +1,19 @@
 <h1>経費申請書編集</h1>
-<%= render 'form', expense: @expense %>
+<%= form_with model: @expense, local: false do |f| %>
+<div class="mb-3">
+<%= f.select :account_id, options_for_select(Account.pluck(:name,:id)), class: "form-select"  %>
+</div>
+<div class="mb-3">
+<%= f.label :expense_title, class: "form-label" %>
+<%= f.text_field :expense_title, class: "form-control" %>
+</div>
+<div class="mb-3">
+<%= f.label :money, class: "form-label" %>
+<%= f.text_field :money, class: "form-control"  %>
+</div>
+<div class="mb-3">
+<%= f.label :perpose, class: "form-label" %>
+<%= f.text_area :purpose, class: "form-control"  %>
+</div>
+<%= f.submit "編集", class: "btn btn-primary" %>
+<% end %>

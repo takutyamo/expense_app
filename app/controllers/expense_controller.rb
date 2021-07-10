@@ -18,7 +18,11 @@ class ExpenseController < ApplicationController
         @expense = Expense.find(params[:id])
     end
 
-    def updated
+    def update
+        @expense = Expense.find(params[:id])
+        if @expense.update(expense_params)
+            redirect_to '/expense'
+        end
     end
 
     def delete
