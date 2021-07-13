@@ -1,4 +1,6 @@
 class ExpenseApprovalController < ApplicationController
+    before_action :require_login
+
     def index
         company = current_user.company
         employee = User.where(company: company)
@@ -37,5 +39,12 @@ class ExpenseApprovalController < ApplicationController
     def show
         @approval = ExpenseApproval.find(params[:id])
     end
+
+    private
+        def require_login
+            unless current_user
+                redirect_to new_user_session_path
+            end
+        end
 
 end

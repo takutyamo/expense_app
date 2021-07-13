@@ -1,4 +1,6 @@
 class EmployeeController < ApplicationController
+    before_action :require_login
+
     def index
         @employee = User.where(company: current_user.company)
     end
@@ -18,7 +20,13 @@ class EmployeeController < ApplicationController
     end
 
     private
-    def employee_params
-        params.require(:user).permit(:first_name,:last_name,:email)
-    end
+        def employee_params
+            params.require(:user).permit(:first_name,:last_name,:email)
+        end
+
+        def require_login
+            unless current_user
+                redirect_to new_user_session_path
+            end
+        end
 end

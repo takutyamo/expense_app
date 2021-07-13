@@ -1,4 +1,6 @@
 class ExpenseController < ApplicationController
+    before_action :require_login
+
     def index
         @expenses = Expense.where(user: current_user).order(updated_at: :desc)
     end
@@ -31,5 +33,11 @@ class ExpenseController < ApplicationController
     private 
     def expense_params
         params.require(:expense).permit(:account_id,:expense_title,:money,:purpose)
+    end
+
+    def require_login
+        unless current_user
+            redirect_to new_user_session_path
+        end
     end
 end
