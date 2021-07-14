@@ -12,8 +12,6 @@ class ExpenseApprovalController < ApplicationController
         expense = Expense.find(params[:id])
         @approval = expense.build_expense_approval
         @approval.user = current_user
-        @approval.approval = 0
-        @approval.comment = "却下時は理由を入力してください。"
         if @approval.save
             expense.applicant = true
             expense.save
