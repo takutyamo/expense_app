@@ -1,5 +1,6 @@
 class ExpenseApprovalController < ApplicationController
     before_action :require_login
+    before_action :require_admin, except: :create
 
     def index
         company = current_user.company
@@ -44,6 +45,13 @@ class ExpenseApprovalController < ApplicationController
         def require_login
             unless current_user
                 redirect_to new_user_session_path
+            end
+        end
+
+        def require_admin
+            puts 'a'
+            unless current_user.admin 
+                redirect_to '/'
             end
         end
 

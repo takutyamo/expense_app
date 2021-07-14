@@ -1,5 +1,6 @@
 class EmployeeController < ApplicationController
     before_action :require_login
+    before_action :require_admin
 
     def index
         @employee = User.where(company: current_user.company)
@@ -27,6 +28,12 @@ class EmployeeController < ApplicationController
         def require_login
             unless current_user
                 redirect_to new_user_session_path
+            end
+        end
+
+        def require_admin
+            unless current_user.admin 
+                redirect_to '/'
             end
         end
 end
