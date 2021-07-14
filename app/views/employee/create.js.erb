@@ -1,1 +1,3 @@
-document.getElementById("errors").innerHTML = "<%= j render("errors", errors: @user.errors)%>"
+errors = document.getElementById("errors")
+errors.style.display = "flex"
+errors.innerHTML = "<%= j render("errors", errors: @user.errors)%>"

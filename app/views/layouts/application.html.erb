@@ -32,14 +32,14 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
             <% if current_user %>
-              <li class="nav-item"><%= link_to root_path, class: "nav-link active" do %><i class="fas fa-home"></i>top<% end %></li>
+              <li class="nav-item"><%= link_to root_path, class: "nav-link active text-secondary" do %><i class="fas fa-home"></i>top<% end %></li>
               <% if current_user.admin %>
-                <li class="nav-item"><%= link_to '/employee/new', class: "nav-link active" do %><i class="fas fa-user-alt"></i>従業員登録<% end %></li>
-                <li class="nav-item"><%= link_to '/employees', class: "nav-link active" do %><i class="fas fa-user-friends"></i>従業員一覧<% end %></li>
-                <li class="nav-item"><%= link_to expense_approval_index_path, class: "nav-link active" do  %><i class="fas fa-file-invoice-dollar"></i>申請書一覧<% end %></li>
+                <li class="nav-item"><%= link_to '/employee/new', class: "nav-link active text-secondary" do %><i class="fas fa-user-alt"></i>従業員登録<% end %></li>
+                <li class="nav-item"><%= link_to '/employees', class: "nav-link active text-secondary" do %><i class="fas fa-user-friends"></i>従業員一覧<% end %></li>
+                <li class="nav-item"><%= link_to expense_approval_index_path, class: "nav-link active text-secondary" do  %><i class="fas fa-file-invoice-dollar"></i>申請書一覧<% end %></li>
               <% else %>
-                <li class="nav-item"><%= link_to  new_expense_path, class: "nav-link active" do %><i class="fas fa-file-invoice-dollar"></i>申請書作成<% end %></li>
-                <li class="nav-item"><%= link_to  expense_index_path, class: "nav-link active" do %><i class="fas fa-file-invoice-dollar"></i>申請経費一覧<% end %></li>
+                <li class="nav-item"><%= link_to  new_expense_path, class: "nav-link active text-secondary" do %><i class="fas fa-file-invoice-dollar"></i>申請書作成<% end %></li>
+                <li class="nav-item"><%= link_to  expense_index_path, class: "nav-link active text-secondary" do %><i class="fas fa-file-invoice-dollar"></i>申請経費一覧<% end %></li>
               <% end %>
             <% end %>
             </ul>
@@ -47,10 +47,7 @@
         </nav>
         <% end %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div id="errors"></div>
-          <% flash.each do |message_type, message| %>
-            <%= message %>
-          <% end %>
+          <div id="errors" class="alert alert-danger"></div>
           <%= yield %>
         </main>
       </div>
